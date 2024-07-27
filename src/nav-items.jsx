@@ -1,4 +1,5 @@
 import Index from "./pages/Index.jsx";
+import Roadmap from "./pages/Roadmap.jsx";
 
 export const navItems = [
   {
@@ -14,7 +15,7 @@ export const navItems = [
   {
     title: "Roadmap",
     to: "/roadmap",
-    page: <div>Roadmap Page</div>,
+    page: <Roadmap />,
   },
   {
     title: "Home",
