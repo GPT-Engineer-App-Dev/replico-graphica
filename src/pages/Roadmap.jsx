@@ -1,100 +1,75 @@
 import React from 'react';
-
-const Node = ({ title, x, y }) => (
-  <g transform={`translate(${x},${y})`}>
-    <rect
-      width="160"
-      height="40"
-      rx="20"
-      ry="20"
-      fill="#4F46E5"
-      className="transition-all duration-300 ease-in-out hover:filter hover:brightness-110"
-    />
-    <text
-      x="80"
-      y="25"
-      textAnchor="middle"
-      fill="white"
-      className="text-sm font-semibold"
-    >
-      {title}
-    </text>
-  </g>
-);
-
-const Connection = ({ start, end, curve }) => (
-  <path
-    d={`M${start.x},${start.y} ${curve ? `Q${curve.x},${curve.y}` : ''} ${end.x},${end.y}`}
-    fill="none"
-    stroke="white"
-    strokeWidth="2"
-  />
-);
+import ReactFlow, { 
+  Background, 
+  Controls, 
+  MiniMap,
+  useNodesState,
+  useEdgesState
+} from 'reactflow';
+import 'reactflow/dist/style.css';
 
 const Roadmap = () => {
-  const nodes = [
-    { id: 'arraysHashing', title: 'Arrays & Hashing', x: 400, y: 50 },
-    { id: 'twoPointers', title: 'Two Pointers', x: 250, y: 150 },
-    { id: 'stack', title: 'Stack', x: 550, y: 150 },
-    { id: 'binarySearch', title: 'Binary Search', x: 100, y: 250 },
-    { id: 'slidingWindow', title: 'Sliding Window', x: 300, y: 250 },
-    { id: 'linkedList', title: 'Linked List', x: 500, y: 250 },
-    { id: 'trees', title: 'Trees', x: 400, y: 350 },
-    { id: 'tries', title: 'Tries', x: 100, y: 450 },
-    { id: 'backtracking', title: 'Backtracking', x: 700, y: 450 },
-    { id: 'heapPriorityQueue', title: 'Heap / Priority Queue', x: 300, y: 550 },
-    { id: 'graphs', title: 'Graphs', x: 550, y: 550 },
-    { id: 'oneDp', title: '1-D DP', x: 800, y: 550 },
-    { id: 'intervals', title: 'Intervals', x: 100, y: 650 },
-    { id: 'greedy', title: 'Greedy', x: 300, y: 650 },
-    { id: 'advancedGraphs', title: 'Advanced Graphs', x: 500, y: 650 },
-    { id: 'twoDp', title: '2-D DP', x: 700, y: 650 },
-    { id: 'bitManipulation', title: 'Bit Manipulation', x: 900, y: 650 },
-    { id: 'mathGeometry', title: 'Math & Geometry', x: 700, y: 750 },
+  const initialNodes = [
+    { id: 'arraysHashing', position: { x: 400, y: 50 }, data: { label: 'Arrays & Hashing' } },
+    { id: 'twoPointers', position: { x: 250, y: 150 }, data: { label: 'Two Pointers' } },
+    { id: 'stack', position: { x: 550, y: 150 }, data: { label: 'Stack' } },
+    { id: 'binarySearch', position: { x: 100, y: 250 }, data: { label: 'Binary Search' } },
+    { id: 'slidingWindow', position: { x: 300, y: 250 }, data: { label: 'Sliding Window' } },
+    { id: 'linkedList', position: { x: 500, y: 250 }, data: { label: 'Linked List' } },
+    { id: 'trees', position: { x: 400, y: 350 }, data: { label: 'Trees' } },
+    { id: 'tries', position: { x: 100, y: 450 }, data: { label: 'Tries' } },
+    { id: 'backtracking', position: { x: 700, y: 450 }, data: { label: 'Backtracking' } },
+    { id: 'heapPriorityQueue', position: { x: 300, y: 550 }, data: { label: 'Heap / Priority Queue' } },
+    { id: 'graphs', position: { x: 550, y: 550 }, data: { label: 'Graphs' } },
+    { id: 'oneDp', position: { x: 800, y: 550 }, data: { label: '1-D DP' } },
+    { id: 'intervals', position: { x: 100, y: 650 }, data: { label: 'Intervals' } },
+    { id: 'greedy', position: { x: 300, y: 650 }, data: { label: 'Greedy' } },
+    { id: 'advancedGraphs', position: { x: 500, y: 650 }, data: { label: 'Advanced Graphs' } },
+    { id: 'twoDp', position: { x: 700, y: 650 }, data: { label: '2-D DP' } },
+    { id: 'bitManipulation', position: { x: 900, y: 650 }, data: { label: 'Bit Manipulation' } },
+    { id: 'mathGeometry', position: { x: 700, y: 750 }, data: { label: 'Math & Geometry' } },
   ];
 
-  const connections = [
-    { start: 'arraysHashing', end: 'twoPointers' },
-    { start: 'arraysHashing', end: 'stack' },
-    { start: 'twoPointers', end: 'binarySearch' },
-    { start: 'twoPointers', end: 'slidingWindow' },
-    { start: 'twoPointers', end: 'linkedList' },
-    { start: 'binarySearch', end: 'trees', curve: { x: 250, y: 300 } },
-    { start: 'slidingWindow', end: 'trees' },
-    { start: 'linkedList', end: 'trees', curve: { x: 550, y: 300 } },
-    { start: 'trees', end: 'tries' },
-    { start: 'trees', end: 'backtracking' },
-    { start: 'trees', end: 'heapPriorityQueue', curve: { x: 350, y: 450 } },
-    { start: 'backtracking', end: 'graphs' },
-    { start: 'backtracking', end: 'oneDp' },
-    { start: 'heapPriorityQueue', end: 'intervals' },
-    { start: 'heapPriorityQueue', end: 'greedy' },
-    { start: 'graphs', end: 'advancedGraphs' },
-    { start: 'graphs', end: 'twoDp', curve: { x: 650, y: 600 } },
-    { start: 'oneDp', end: 'bitManipulation' },
-    { start: 'twoDp', end: 'mathGeometry' },
-    { start: 'bitManipulation', end: 'mathGeometry' },
+  const initialEdges = [
+    { id: 'e1-2', source: 'arraysHashing', target: 'twoPointers' },
+    { id: 'e1-3', source: 'arraysHashing', target: 'stack' },
+    { id: 'e2-4', source: 'twoPointers', target: 'binarySearch' },
+    { id: 'e2-5', source: 'twoPointers', target: 'slidingWindow' },
+    { id: 'e2-6', source: 'twoPointers', target: 'linkedList' },
+    { id: 'e4-7', source: 'binarySearch', target: 'trees', type: 'smoothstep' },
+    { id: 'e5-7', source: 'slidingWindow', target: 'trees' },
+    { id: 'e6-7', source: 'linkedList', target: 'trees', type: 'smoothstep' },
+    { id: 'e7-8', source: 'trees', target: 'tries' },
+    { id: 'e7-9', source: 'trees', target: 'backtracking' },
+    { id: 'e7-10', source: 'trees', target: 'heapPriorityQueue', type: 'smoothstep' },
+    { id: 'e9-11', source: 'backtracking', target: 'graphs' },
+    { id: 'e9-12', source: 'backtracking', target: 'oneDp' },
+    { id: 'e10-13', source: 'heapPriorityQueue', target: 'intervals' },
+    { id: 'e10-14', source: 'heapPriorityQueue', target: 'greedy' },
+    { id: 'e11-15', source: 'graphs', target: 'advancedGraphs' },
+    { id: 'e11-16', source: 'graphs', target: 'twoDp', type: 'smoothstep' },
+    { id: 'e12-17', source: 'oneDp', target: 'bitManipulation' },
+    { id: 'e16-18', source: 'twoDp', target: 'mathGeometry' },
+    { id: 'e17-18', source: 'bitManipulation', target: 'mathGeometry' },
   ];
+
+  const [nodes, , onNodesChange] = useNodesState(initialNodes);
+  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
 
   return (
-    <div className="bg-gray-900 min-h-screen flex justify-center items-center p-4">
-      <svg width="1000" height="800" className="bg-gray-800 rounded-lg shadow-lg">
-        {connections.map((conn, index) => {
-          const start = nodes.find(n => n.id === conn.start);
-          const end = nodes.find(n => n.id === conn.end);
-          return (
-            <Connection
-              key={index}
-              start={{ x: start.x + 80, y: start.y + 20 }}
-              end={{ x: end.x + 80, y: end.y + 20 }}
-              curve={conn.curve}
-            />
-          );
-        })}
-        {nodes.map(node => (
-          <Node key={node.id} title={node.title} x={node.x} y={node.y} />
-        ))}
-      </svg>
+    <div className="bg-gray-900 w-full h-screen">
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        fitView
+        attributionPosition="bottom-left"
+      >
+        <Background color="#888" gap={16} />
+        <Controls />
+        <MiniMap />
+      </ReactFlow>
     </div>
   );
 };

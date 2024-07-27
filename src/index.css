@@ -1,3 +1,5 @@
+@import 'reactflow/dist/style.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -73,5 +75,33 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.react-flow__node {
+  @apply bg-indigo-600 text-white rounded-full px-4 py-2 font-semibold;
+}
+
+.react-flow__node:hover {
+  @apply bg-indigo-700;
+}
+
+.react-flow__edge-path {
+  @apply stroke-white stroke-2;
+}
+
+.react-flow__attribution {
+  @apply bg-transparent text-white;
+}
+
+.react-flow__controls {
+  @apply bg-gray-800 rounded-md;
+}
+
+.react-flow__controls-button {
+  @apply border-gray-700 text-white hover:bg-gray-700;
+}
+
+.react-flow__minimap {
+  @apply bg-gray-800;
 }
 
