@@ -5,50 +5,20 @@ import ReactFlow, {
   MiniMap,
   useNodesState,
   useEdgesState,
-  getBezierPath
+  MarkerType
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import RoadmapSidebar from '@/components/RoadmapSidebar';
 
-const CustomEdge = ({
-  id,
-  sourceX,
-  sourceY,
-  targetX,
-  targetY,
-  sourcePosition,
-  targetPosition,
-  style = {},
-  markerEnd,
-}) => {
-  const [edgePath] = getBezierPath({
-    sourceX,
-    sourceY,
-    sourcePosition,
-    targetX,
-    targetY,
-    targetPosition,
-  });
-
-  return (
-    <path
-      id={id}
-      style={{...style, strokeWidth: 2, stroke: 'white'}}
-      className="react-flow__edge-path"
-      d={edgePath}
-      markerEnd={markerEnd}
-    />
-  );
-};
-
 const Roadmap = () => {
-  const edgeType = {
-    custom: CustomEdge,
-  };
-
   const edgeOptions = {
-    type: 'custom',
-    markerEnd: 'url(#arrowhead)',
+    type: 'smoothstep',
+    markerEnd: {
+      type: MarkerType.ArrowClosed,
+      width: 20,
+      height: 20,
+      color: '#FFF',
+    },
     style: { strokeWidth: 2, stroke: 'white' },
   };
   const initialNodes = [
@@ -106,35 +76,12 @@ const Roadmap = () => {
           edges={edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
-          edgeTypes={edgeType}
           fitView
           attributionPosition="bottom-left"
         >
           <Background color="#888" gap={16} />
           <Controls />
           <MiniMap />
-          <svg style={{ position: 'absolute', top: 0, left: 0 }}>
-            <defs>
-              <marker
-                id="arrowhead"
-                viewBox="-10 -10 20 20"
-                refX="0"
-                refY="0"
-                markerWidth="20"
-                markerHeight="20"
-                orient="auto"
-              >
-                <polyline
-                  stroke="white"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  fill="white"
-                  points="-6.75,-6.75 0,0 -6.75,6.75"
-                />
-              </marker>
-            </defs>
-          </svg>
         </ReactFlow>
       </div>
       <RoadmapSidebar />
