@@ -89,6 +89,14 @@
   @apply stroke-white stroke-2;
 }
 
+.react-flow__edge {
+  @apply opacity-50;
+}
+
+.react-flow__edge:hover {
+  @apply opacity-100;
+}
+
 .react-flow__attribution {
   @apply bg-transparent text-white;
 }
