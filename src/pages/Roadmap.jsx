@@ -45,6 +45,12 @@ const Roadmap = () => {
   const edgeType = {
     custom: CustomEdge,
   };
+
+  const edgeOptions = {
+    type: 'custom',
+    markerEnd: 'url(#arrowhead)',
+    style: { strokeWidth: 2, stroke: 'white' },
+  };
   const initialNodes = [
     { id: 'arraysHashing', position: { x: 400, y: 50 }, data: { label: 'Arrays & Hashing' } },
     { id: 'twoPointers', position: { x: 250, y: 150 }, data: { label: 'Two Pointers' } },
@@ -67,26 +73,26 @@ const Roadmap = () => {
   ];
 
   const initialEdges = [
-    { id: 'e1-2', source: 'arraysHashing', target: 'twoPointers', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e1-3', source: 'arraysHashing', target: 'stack', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e2-4', source: 'twoPointers', target: 'binarySearch', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e2-5', source: 'twoPointers', target: 'slidingWindow', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e2-6', source: 'twoPointers', target: 'linkedList', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e4-7', source: 'binarySearch', target: 'trees', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e5-7', source: 'slidingWindow', target: 'trees', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e6-7', source: 'linkedList', target: 'trees', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e7-8', source: 'trees', target: 'tries', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e7-9', source: 'trees', target: 'backtracking', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e7-10', source: 'trees', target: 'heapPriorityQueue', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e9-11', source: 'backtracking', target: 'graphs', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e9-12', source: 'backtracking', target: 'oneDp', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e10-13', source: 'heapPriorityQueue', target: 'intervals', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e10-14', source: 'heapPriorityQueue', target: 'greedy', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e11-15', source: 'graphs', target: 'advancedGraphs', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e11-16', source: 'graphs', target: 'twoDp', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e12-17', source: 'oneDp', target: 'bitManipulation', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e16-18', source: 'twoDp', target: 'mathGeometry', type: 'custom', markerEnd: 'url(#arrowhead)' },
-    { id: 'e17-18', source: 'bitManipulation', target: 'mathGeometry', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e1-2', source: 'arraysHashing', target: 'twoPointers', ...edgeOptions },
+    { id: 'e1-3', source: 'arraysHashing', target: 'stack', ...edgeOptions },
+    { id: 'e2-4', source: 'twoPointers', target: 'binarySearch', ...edgeOptions },
+    { id: 'e2-5', source: 'twoPointers', target: 'slidingWindow', ...edgeOptions },
+    { id: 'e2-6', source: 'twoPointers', target: 'linkedList', ...edgeOptions },
+    { id: 'e4-7', source: 'binarySearch', target: 'trees', ...edgeOptions },
+    { id: 'e5-7', source: 'slidingWindow', target: 'trees', ...edgeOptions },
+    { id: 'e6-7', source: 'linkedList', target: 'trees', ...edgeOptions },
+    { id: 'e7-8', source: 'trees', target: 'tries', ...edgeOptions },
+    { id: 'e7-9', source: 'trees', target: 'backtracking', ...edgeOptions },
+    { id: 'e7-10', source: 'trees', target: 'heapPriorityQueue', ...edgeOptions },
+    { id: 'e9-11', source: 'backtracking', target: 'graphs', ...edgeOptions },
+    { id: 'e9-12', source: 'backtracking', target: 'oneDp', ...edgeOptions },
+    { id: 'e10-13', source: 'heapPriorityQueue', target: 'intervals', ...edgeOptions },
+    { id: 'e10-14', source: 'heapPriorityQueue', target: 'greedy', ...edgeOptions },
+    { id: 'e11-15', source: 'graphs', target: 'advancedGraphs', ...edgeOptions },
+    { id: 'e11-16', source: 'graphs', target: 'twoDp', ...edgeOptions },
+    { id: 'e12-17', source: 'oneDp', target: 'bitManipulation', ...edgeOptions },
+    { id: 'e16-18', source: 'twoDp', target: 'mathGeometry', ...edgeOptions },
+    { id: 'e17-18', source: 'bitManipulation', target: 'mathGeometry', ...edgeOptions },
   ];
 
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
@@ -122,7 +128,7 @@ const Roadmap = () => {
                   stroke="white"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth="1"
+                  strokeWidth="2"
                   fill="white"
                   points="-6.75,-6.75 0,0 -6.75,6.75"
                 />
