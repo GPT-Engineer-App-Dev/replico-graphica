@@ -75,8 +75,3 @@
   }
 }
 
-@layer utilities {
-  .hover\:rotate-15:hover {
-    transform: rotate(15deg);
-  }
-}

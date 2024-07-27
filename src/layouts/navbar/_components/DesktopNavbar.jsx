@@ -9,7 +9,7 @@ export const DesktopNavbar = ({ navItems }) => (
       <img 
         src="https://neetcode.io/assets/neetcode-io-logo.png" 
         alt="NeetCode Logo" 
-        className="h-8 w-8 transition-transform duration-300 ease-in-out hover:rotate-15"
+        className="h-8 w-8 transition-transform duration-300 ease-in-out hover:rotate-[15deg]"
       />
       <span>NeetCode</span>
     </NavItem>
