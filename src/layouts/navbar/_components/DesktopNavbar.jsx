@@ -1,4 +1,3 @@
-import { Rocket } from "lucide-react";
 import { NavItem } from "./NavItem";
 
 export const DesktopNavbar = ({ navItems }) => (
@@ -7,7 +6,11 @@ export const DesktopNavbar = ({ navItems }) => (
       to="/"
       className="flex items-center gap-2 text-lg font-semibold md:text-base"
     >
-      <Rocket className="h-6 w-6" />
+      <img 
+        src="https://neetcode.io/assets/neetcode-io-logo.png" 
+        alt="NeetCode Logo" 
+        className="h-8 w-8 transition-transform duration-300 ease-in-out hover:rotate-15"
+      />
       <span>NeetCode</span>
     </NavItem>
     {navItems.filter(item => item.title !== "Home").map((item) => (
