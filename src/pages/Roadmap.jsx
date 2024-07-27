@@ -12,7 +12,8 @@ import RoadmapSidebar from '@/components/RoadmapSidebar';
 
 const Roadmap = () => {
   const edgeOptions = {
-    type: 'smoothstep',
+    type: 'default',  // This is the bezier curve type
+    animated: true,   // Optional: adds animation to the edges
     markerEnd: {
       type: MarkerType.ArrowClosed,
       width: 20,
