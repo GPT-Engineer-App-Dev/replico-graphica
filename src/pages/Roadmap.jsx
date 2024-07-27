@@ -7,6 +7,7 @@ import ReactFlow, {
   useEdgesState
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+import RoadmapSidebar from '@/components/RoadmapSidebar';
 
 const Roadmap = () => {
   const initialNodes = [
@@ -57,19 +58,22 @@ const Roadmap = () => {
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
 
   return (
-    <div className="bg-gray-900 w-full h-screen">
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        fitView
-        attributionPosition="bottom-left"
-      >
-        <Background color="#888" gap={16} />
-        <Controls />
-        <MiniMap />
-      </ReactFlow>
+    <div className="bg-gray-900 w-full h-screen flex">
+      <div className="flex-grow">
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          fitView
+          attributionPosition="bottom-left"
+        >
+          <Background color="#888" gap={16} />
+          <Controls />
+          <MiniMap />
+        </ReactFlow>
+      </div>
+      <RoadmapSidebar />
     </div>
   );
 };
