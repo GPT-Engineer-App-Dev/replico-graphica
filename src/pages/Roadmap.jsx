@@ -4,12 +4,47 @@ import ReactFlow, {
   Controls, 
   MiniMap,
   useNodesState,
-  useEdgesState
+  useEdgesState,
+  getBezierPath
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import RoadmapSidebar from '@/components/RoadmapSidebar';
 
+const CustomEdge = ({
+  id,
+  sourceX,
+  sourceY,
+  targetX,
+  targetY,
+  sourcePosition,
+  targetPosition,
+  style = {},
+  markerEnd,
+}) => {
+  const [edgePath] = getBezierPath({
+    sourceX,
+    sourceY,
+    sourcePosition,
+    targetX,
+    targetY,
+    targetPosition,
+  });
+
+  return (
+    <path
+      id={id}
+      style={{...style, strokeWidth: 2, stroke: 'white'}}
+      className="react-flow__edge-path"
+      d={edgePath}
+      markerEnd={markerEnd}
+    />
+  );
+};
+
 const Roadmap = () => {
+  const edgeType = {
+    custom: CustomEdge,
+  };
   const initialNodes = [
     { id: 'arraysHashing', position: { x: 400, y: 50 }, data: { label: 'Arrays & Hashing' } },
     { id: 'twoPointers', position: { x: 250, y: 150 }, data: { label: 'Two Pointers' } },
@@ -32,26 +67,26 @@ const Roadmap = () => {
   ];
 
   const initialEdges = [
-    { id: 'e1-2', source: 'arraysHashing', target: 'twoPointers', type: 'bezier' },
-    { id: 'e1-3', source: 'arraysHashing', target: 'stack', type: 'bezier' },
-    { id: 'e2-4', source: 'twoPointers', target: 'binarySearch', type: 'bezier' },
-    { id: 'e2-5', source: 'twoPointers', target: 'slidingWindow', type: 'bezier' },
-    { id: 'e2-6', source: 'twoPointers', target: 'linkedList', type: 'bezier' },
-    { id: 'e4-7', source: 'binarySearch', target: 'trees', type: 'bezier' },
-    { id: 'e5-7', source: 'slidingWindow', target: 'trees', type: 'bezier' },
-    { id: 'e6-7', source: 'linkedList', target: 'trees', type: 'bezier' },
-    { id: 'e7-8', source: 'trees', target: 'tries', type: 'bezier' },
-    { id: 'e7-9', source: 'trees', target: 'backtracking', type: 'bezier' },
-    { id: 'e7-10', source: 'trees', target: 'heapPriorityQueue', type: 'bezier' },
-    { id: 'e9-11', source: 'backtracking', target: 'graphs', type: 'bezier' },
-    { id: 'e9-12', source: 'backtracking', target: 'oneDp', type: 'bezier' },
-    { id: 'e10-13', source: 'heapPriorityQueue', target: 'intervals', type: 'bezier' },
-    { id: 'e10-14', source: 'heapPriorityQueue', target: 'greedy', type: 'bezier' },
-    { id: 'e11-15', source: 'graphs', target: 'advancedGraphs', type: 'bezier' },
-    { id: 'e11-16', source: 'graphs', target: 'twoDp', type: 'bezier' },
-    { id: 'e12-17', source: 'oneDp', target: 'bitManipulation', type: 'bezier' },
-    { id: 'e16-18', source: 'twoDp', target: 'mathGeometry', type: 'bezier' },
-    { id: 'e17-18', source: 'bitManipulation', target: 'mathGeometry', type: 'bezier' },
+    { id: 'e1-2', source: 'arraysHashing', target: 'twoPointers', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e1-3', source: 'arraysHashing', target: 'stack', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e2-4', source: 'twoPointers', target: 'binarySearch', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e2-5', source: 'twoPointers', target: 'slidingWindow', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e2-6', source: 'twoPointers', target: 'linkedList', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e4-7', source: 'binarySearch', target: 'trees', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e5-7', source: 'slidingWindow', target: 'trees', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e6-7', source: 'linkedList', target: 'trees', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e7-8', source: 'trees', target: 'tries', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e7-9', source: 'trees', target: 'backtracking', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e7-10', source: 'trees', target: 'heapPriorityQueue', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e9-11', source: 'backtracking', target: 'graphs', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e9-12', source: 'backtracking', target: 'oneDp', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e10-13', source: 'heapPriorityQueue', target: 'intervals', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e10-14', source: 'heapPriorityQueue', target: 'greedy', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e11-15', source: 'graphs', target: 'advancedGraphs', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e11-16', source: 'graphs', target: 'twoDp', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e12-17', source: 'oneDp', target: 'bitManipulation', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e16-18', source: 'twoDp', target: 'mathGeometry', type: 'custom', markerEnd: 'url(#arrowhead)' },
+    { id: 'e17-18', source: 'bitManipulation', target: 'mathGeometry', type: 'custom', markerEnd: 'url(#arrowhead)' },
   ];
 
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
@@ -65,12 +100,35 @@ const Roadmap = () => {
           edges={edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
+          edgeTypes={edgeType}
           fitView
           attributionPosition="bottom-left"
         >
           <Background color="#888" gap={16} />
           <Controls />
           <MiniMap />
+          <svg style={{ position: 'absolute', top: 0, left: 0 }}>
+            <defs>
+              <marker
+                id="arrowhead"
+                viewBox="-10 -10 20 20"
+                refX="0"
+                refY="0"
+                markerWidth="20"
+                markerHeight="20"
+                orient="auto"
+              >
+                <polyline
+                  stroke="white"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1"
+                  fill="white"
+                  points="-6.75,-6.75 0,0 -6.75,6.75"
+                />
+              </marker>
+            </defs>
+          </svg>
         </ReactFlow>
       </div>
       <RoadmapSidebar />
